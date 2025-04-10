@@ -122,6 +122,24 @@ const OrdersPage = () => {
               </div>
             </div>
           </div>
+
+          <div className="mt-8 flex justify-center">
+            <div className="max-w-md">
+              <img 
+                src="/order-confirmation.jpg" 
+                alt="Order Confirmation" 
+                className="w-full rounded-lg shadow-md" 
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = "/placeholder.svg";
+                }}
+              />
+              <p className="text-center text-gray-500 mt-4">
+                {selectedOrder.status === "Delivered" 
+                  ? "Your order has been delivered. Thank you for shopping with us!" 
+                  : "Your order is being processed. We'll notify you once it's on the way!"}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     );
