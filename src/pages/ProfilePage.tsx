@@ -12,6 +12,7 @@ import {
 import { useToast } from "@/components/ui/use-toast";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Package } from "lucide-react";
 
 const ProfilePage = () => {
   const { user, logout, isAuthenticated } = useAuth();
@@ -119,7 +120,7 @@ const ProfilePage = () => {
             
             <TabsContent value="orders">
               <div className="bg-white rounded-lg border p-6">
-                <h2 className="text-xl font-semibold mb-4">Order History</h2>
+                <h2 className="text-xl font-semibold mb-4">Recent Orders</h2>
                 
                 {orders.length > 0 ? (
                   <div className="space-y-4">
@@ -129,11 +130,14 @@ const ProfilePage = () => {
                         className="border rounded-lg p-4 hover:shadow-md transition-shadow"
                       >
                         <div className="flex flex-wrap justify-between gap-4 mb-2">
-                          <div>
-                            <h3 className="font-medium">{order.id}</h3>
-                            <p className="text-sm text-gray-500">
-                              {new Date(order.date).toLocaleDateString()}
-                            </p>
+                          <div className="flex items-center">
+                            <Package className="h-5 w-5 mr-2 text-gray-500" />
+                            <div>
+                              <h3 className="font-medium">{order.id}</h3>
+                              <p className="text-sm text-gray-500">
+                                {new Date(order.date).toLocaleDateString()}
+                              </p>
+                            </div>
                           </div>
                           <div>
                             <span className={`inline-block px-2 py-1 text-xs rounded-full ${
@@ -154,12 +158,24 @@ const ProfilePage = () => {
                           </div>
                         </div>
                         <div className="mt-3">
-                          <Button variant="outline" size="sm">
+                          <Button 
+                            variant="outline" 
+                            size="sm"
+                            onClick={() => navigate(`/orders/${order.id}`)}
+                          >
                             View Details
                           </Button>
                         </div>
                       </div>
                     ))}
+                    <div className="mt-4 text-center">
+                      <Button 
+                        variant="link"
+                        onClick={() => navigate("/orders")}
+                      >
+                        View All Orders
+                      </Button>
+                    </div>
                   </div>
                 ) : (
                   <div className="text-center py-8">
